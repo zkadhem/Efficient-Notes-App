@@ -6,8 +6,9 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using iTextSharp.text;
+using System.Windows.Media;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using Xceed.Words.NET;
 using Microsoft.Win32;
 
@@ -41,7 +42,7 @@ namespace FormattedNotesApp
             var request = context.Request;
             if (request.HttpMethod == "POST" && request.InputStream != null)
             {
-                using (var reader = new System.IO.StreamReader(request.InputStream, Encoding.UTF8))
+                using (var reader = new StreamReader(request.InputStream, Encoding.UTF8))
                 {
                     string receivedText = reader.ReadToEnd();
                     Dispatcher.Invoke(() => AppendToNotes(receivedText));
@@ -55,8 +56,7 @@ namespace FormattedNotesApp
 
         private void AppendToNotes(string text)
         {
-            var paragraph = new System.Windows.Documents.Paragraph(new Run(text));
-            paragraph.LineHeight = 16; // Adjust line spacing
+            var paragraph = new System.Windows.Documents.Paragraph(new Run(text)) { LineHeight = 16 };
             NotesEditor.Document.Blocks.Add(paragraph);
         }
 
@@ -96,10 +96,102 @@ namespace FormattedNotesApp
             if (_notes.TryGetValue(noteTitle, out string content))
             {
                 NotesEditor.Document.Blocks.Clear();
-                var paragraph = new System.Windows.Documents.Paragraph(new Run(content));
-                paragraph.LineHeight = 16; // Adjust line spacing
+                var paragraph = new System.Windows.Documents.Paragraph(new Run(content)) { LineHeight = 16 };
                 NotesEditor.Document.Blocks.Add(paragraph);
             }
+        }
+
+        private void OpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Text Files (*.txt)|*.txt|PDF Files (*.pdf)|*.pdf|Word Files (*.docx)|*.docx"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
+
+                switch (fileExtension)
+                {
+                    case ".txt":
+                        NotesEditor.Document.Blocks.Clear();
+                        NotesEditor.Document.Blocks.Add(new System.Windows.Documents.Paragraph(new Run(File.ReadAllText(filePath))));
+                        break;
+                    case ".pdf":
+                        NotesEditor.Document.Blocks.Clear();
+                        NotesEditor.Document.Blocks.Add(new System.Windows.Documents.Paragraph(new Run(ExtractTextFromPdf(filePath))));
+                        break;
+                    case ".docx":
+                        NotesEditor.Document.Blocks.Clear();
+                        NotesEditor.Document.Blocks.Add(new System.Windows.Documents.Paragraph(new Run(ExtractTextFromDocx(filePath))));
+                        break;
+                    default:
+                        MessageBox.Show("Unsupported file format.");
+                        break;
+                }
+            }
+        }
+
+        private string ExtractTextFromPdf(string filePath)
+        {
+            var text = new StringBuilder();
+            using (var pdfReader = new PdfReader(filePath))
+            {
+                for (int i = 1; i <= pdfReader.NumberOfPages; i++)
+                {
+                    text.Append(PdfTextExtractor.GetTextFromPage(pdfReader, i));
+                }
+            }
+            return text.ToString();
+        }
+
+        private string ExtractTextFromDocx(string filePath)
+        {
+            var text = new StringBuilder();
+            using (var document = DocX.Load(filePath))
+            {
+                foreach (var paragraph in document.Paragraphs)
+                {
+                    text.AppendLine(paragraph.Text);
+                }
+            }
+            return text.ToString();
+        }
+
+        private void FontSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FontSizeComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                double fontSize = double.Parse((string)selectedItem.Content);
+                NotesEditor.Selection.ApplyPropertyValue(TextElement.FontSizeProperty, fontSize);
+            }
+        }
+
+        private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ColorComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string colorName = selectedItem.Content.ToString();
+                var color = (Color)ColorConverter.ConvertFromString(colorName);
+                NotesEditor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(color));
+            }
+        }
+
+        private void AlignLeft_Click(object sender, RoutedEventArgs e)
+        {
+            NotesEditor.Selection.ApplyPropertyValue(Paragraph.TextAlignmentProperty, TextAlignment.Left);
+        }
+
+        private void AlignCenter_Click(object sender, RoutedEventArgs e)
+        {
+            NotesEditor.Selection.ApplyPropertyValue(Paragraph.TextAlignmentProperty, TextAlignment.Center);
+        }
+
+        private void AlignRight_Click(object sender, RoutedEventArgs e)
+        {
+            NotesEditor.Selection.ApplyPropertyValue(Paragraph.TextAlignmentProperty, TextAlignment.Right);
         }
 
         private void ExportNote_Click(object sender, RoutedEventArgs e)
@@ -127,16 +219,16 @@ namespace FormattedNotesApp
                 }
                 else if (path.EndsWith(".pdf"))
                 {
-                    ExportToPdf(path, noteContent);
+                    ExportTextToPdf(path, noteContent);
                 }
                 else if (path.EndsWith(".docx"))
                 {
-                    ExportToDocx(path, noteContent);
+                    ExportTextToDocx(path, noteContent);
                 }
             }
         }
 
-        private void ExportToPdf(string filePath, string content)
+        private void ExportTextToPdf(string filePath, string content)
         {
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
@@ -148,7 +240,7 @@ namespace FormattedNotesApp
             }
         }
 
-        private void ExportToDocx(string filePath, string content)
+        private void ExportTextToDocx(string filePath, string content)
         {
             using (var document = DocX.Create(filePath))
             {

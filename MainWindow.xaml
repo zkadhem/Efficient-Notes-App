@@ -9,15 +9,36 @@
         </Grid.RowDefinitions>
 
         <!-- Toolbar for Formatting Options -->
-        <ToolBar Grid.Row="0">
-            <Button Content="New Note" Click="NewNote_Click" />
-            <Button Content="Bold" Click="Bold_Click"/>
-            <Button Content="Italic" Click="Italic_Click"/>
-            <Button Content="Underline" Click="Underline_Click"/>
-            <Button Content="Bullet" Click="Bullet_Click"/>
-            <Button Content="Export" Click="ExportNote_Click" />
+<ToolBar Grid.Row="0">
+    <Button Content="New Note" Click="NewNote_Click" />
+    <Button Content="Bold" Click="Bold_Click"/>
+    <Button Content="Italic" Click="Italic_Click"/>
+    <Button Content="Underline" Click="Underline_Click"/>
+    <Button Content="Bullet" Click="Bullet_Click"/>
+    <Button Content="Export" Click="ExportNote_Click" />
+    <Button Content="Open" Click="OpenFile_Click" />
 
-        </ToolBar>
+    <!-- Font Size ComboBox -->
+    <ComboBox x:Name="FontSizeComboBox" SelectionChanged="FontSizeComboBox_SelectionChanged" Width="60">
+        <ComboBoxItem Content="12"/>
+        <ComboBoxItem Content="14"/>
+        <ComboBoxItem Content="16"/>
+        <ComboBoxItem Content="18"/>
+        <ComboBoxItem Content="20"/>
+    </ComboBox>
+
+    <!-- New Text Color ComboBox -->
+    <ComboBox x:Name="ColorComboBox" SelectionChanged="ColorComboBox_SelectionChanged" Width="100">
+        <ComboBoxItem Content="Black" Foreground="Black"/>
+        <ComboBoxItem Content="Red" Foreground="Red"/>
+        <ComboBoxItem Content="Blue" Foreground="Blue"/>
+        <ComboBoxItem Content="Green" Foreground="Green"/>
+    </ComboBox>
+
+    <Button Content="Align Left" Click="AlignLeft_Click"/>
+    <Button Content="Align Center" Click="AlignCenter_Click"/>
+    <Button Content="Align Right" Click="AlignRight_Click"/>
+</ToolBar>
 
         <!-- Notes Editor and Notes List -->
         <Grid Grid.Row="1">
