@@ -1,0 +1,14 @@
+C:\Users\zaink\NotesApp\bin\Debug\net8.0\NotesApp.exe
+C:\Users\zaink\NotesApp\bin\Debug\net8.0\NotesApp.deps.json
+C:\Users\zaink\NotesApp\bin\Debug\net8.0\NotesApp.runtimeconfig.json
+C:\Users\zaink\NotesApp\bin\Debug\net8.0\NotesApp.dll
+C:\Users\zaink\NotesApp\bin\Debug\net8.0\NotesApp.pdb
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.AssemblyInfoInputs.cache
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.AssemblyInfo.cs
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.csproj.CoreCompileInputs.cache
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.dll
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\refint\NotesApp.dll
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.pdb
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\NotesApp.genruntimeconfig.cache
+C:\Users\zaink\NotesApp\obj\Debug\net8.0\ref\NotesApp.dll

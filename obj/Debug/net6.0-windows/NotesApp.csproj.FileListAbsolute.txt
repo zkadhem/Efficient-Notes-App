@@ -1,0 +1,2 @@
+C:\Users\zaink\NotesApp\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\zaink\NotesApp\obj\Debug\net6.0-windows\NotesApp_MarkupCompile.cache
