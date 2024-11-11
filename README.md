@@ -1,4 +1,4 @@
-﻿# Efficient Notes App
+﻿Efficient Notes App
  =======
  
 A feature-rich, WPF-based note-taking application built in C#. It’s designed for easy access to create, organize, and format notes with advanced options, making it ideal for anyone looking for a modern, intuitive, and powerful tool to manage their notes. The application also includes a Chrome extension for quick note-taking while browsing the web!
