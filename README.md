@@ -27,7 +27,7 @@ A feature-rich, WPF-based note-taking application built in C#. Designed for quic
 
 ## Getting Started
 
-1. **Download the Executable**: Download the `NotesApp.exe` file from the releases page (or provide an external link).
+1. **Download the Executable**: Download the `NotesApp.exe` file from the releases page.
 2. **Run the Application**: Simply double-click the `.exe` file to start the application.
 3. **Install the Chrome Extension (Optional)**:
    - Go to `chrome://extensions/`, enable "Developer mode," and load the `ChromeExtension` folder for quick webpage integration.
