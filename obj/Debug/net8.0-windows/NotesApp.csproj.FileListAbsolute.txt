@@ -18,3 +18,10 @@ C:\Users\zaink\NotesApp\obj\Debug\net8.0-windows\NotesApp.pdb
 C:\Users\zaink\NotesApp\obj\Debug\net8.0-windows\NotesApp.genruntimeconfig.cache
 C:\Users\zaink\NotesApp\obj\Debug\net8.0-windows\ref\NotesApp.dll
 C:\Users\zaink\NotesApp\obj\Debug\net8.0-windows\NotesApp.sourcelink.json
+C:\Users\zaink\NotesApp\obj\Debug\net8.0-windows\NotesApp.csproj.AssemblyReference.cache
+C:\Users\zaink\NotesApp\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\zaink\NotesApp\bin\Debug\net8.0-windows\itextsharp.dll
+C:\Users\zaink\NotesApp\bin\Debug\net8.0-windows\Xceed.Document.NET.dll
+C:\Users\zaink\NotesApp\bin\Debug\net8.0-windows\Xceed.PDF.NET.dll
+C:\Users\zaink\NotesApp\bin\Debug\net8.0-windows\Xceed.Words.NET.dll
+C:\Users\zaink\NotesApp\obj\Debug\net8.0-windows\NotesApp.csproj.Up2Date
