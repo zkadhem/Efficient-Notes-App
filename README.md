@@ -3,7 +3,7 @@
 A feature-rich, WPF-based note-taking application built in C#. It’s designed for easy access to create, organize, and format notes with advanced options, making it ideal for anyone looking for a modern, intuitive, and powerful tool to manage their notes. The application also includes a Chrome extension for quick note-taking while browsing the web!
 
 # Key Features
---
+
 **1. Intuitive Note Creation and Organization**
 Quickly create, edit, and save multiple notes within a single application.
 Organize notes with a dedicated notes list, allowing easy switching between multiple documents.
